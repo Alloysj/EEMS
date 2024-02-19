@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eems</title>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous">
+        </script>
+
+    <script>
+        $(function () {
+            $("#header").load("utils/header.html");
+            $("#footer").load("utils/footer.html");
+        });
+    </script>
+</head>
+
+<body>
+    <div id="header"></div>
+    <div class="content"><!--body content holder-->
+        <div class="container">
+            <div class="col-md-12"><!--body content title holder with 12 grid columns-->
+                <h1 style="color:#003300 ; font-size:38px ;"><strong>Contact Us</strong></h1><!--body content title-->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-md-12">
+                <hr>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="col-md-6 contacts">
+                <h1 style="color:#000080 ; font-size:42px ; font-style:bold "><span
+                        class="glyphicon glyphicon-user"></span> Egerton</h1>
+                <p>
+                    <span class="glyphicon glyphicon-envelope"></span> Email: <a
+                        href="mailto:egertonevent@gmail.com"></a> <br>
+
+                    <span class="glyphicon glyphicon-phone"></span> Mobile: <a href="tel:+254115123026"></a>
+                </p>
+            </div>
+            <div class="col-md-6 contacts">
+                <h1 style="color:#000080 ; font-size:42px ; font-style:bold "><span
+                        class="glyphicon glyphicon-user"></span> Example</h1>
+                <p>
+                    <span class="glyphicon glyphicon-envelope"></span> Email: example@gmail.com<br>
+
+                    <span class="glyphicon glyphicon-phone"></span> Mobile: 0776543210
+                </p>
+            </div>
+        </div>
+
+
+    </div><!--body content div-->
+    <hr class="footerline">
+    <div id="footer"></div>
+</body>
+
+</html>
