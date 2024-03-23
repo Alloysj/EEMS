@@ -21,14 +21,14 @@
                             echo 'Time:' . $row['time'] .'<br>'; 
                             echo 'Location:' . $row['location'] .'<br>'; 
                             echo 'Student Co-ordinator:' . $row['st_name'] .'<br>'; 
-                            echo 'Staff Co-ordinator:' . $row['name'] .'<br>'; 
+                            echo 'Staff Co-ordinator:' . $row['name'] .'<br>';
                     
                         ?>
                             </p>
                             
                             <br><br>
                         <?php echo
-                             '<a class="btn btn-default" href="register.php"> <span class="glyphicon glyphicon-circle-arrow-right"></span>Register</a>'
+                             '<a class="btn btn-default" href="registerEvent.php?event_id=' .$row['event_id'] . '"> <span class="glyphicon glyphicon-circle-arrow-right"></span>Register</a>'
                             ?>
                                                         </div><!--subcontent div-->
                     </div><!--container div-->

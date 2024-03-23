@@ -34,11 +34,11 @@
         <label>Phone:</label><br>
         <input type="text" name="phone"  class="form-control" required><br><br>
 
-        <label>College:</label><br>
-        <input type="text" name="college"  class="form-control" required><br><br>
+        <label>Faculty:</label><br>
+        <input type="text" name="faculty"  class="form-control" required><br><br>
 
         <button type="submit" name="update" required>Submit</button><br><br>
-        <a href="usn.php" ><u>Already registered ?</u></a>
+        <a href="regNo.php" ><u>Already registered ?</u></a>
 
     </div>
     </div>
@@ -60,28 +60,28 @@
         $sem=$_POST["sem"];
         $email=$_POST["email"];
         $phone=$_POST["phone"];
-        $college=$_POST["college"];
+        $faculty=$_POST["faculty"];
 
 
-        if( !empty($reg_no) || !empty($name) || !empty($branch) || !empty($sem) || !empty($email) || !empty($phone) || !empty($college) )
+        if( !empty($reg_no) || !empty($name) || !empty($branch) || !empty($sem) || !empty($email) || !empty($phone) || !empty($faculty) )
         {
         
             include 'classes/db1.php';     
-                $INSERT="INSERT INTO participant (reg_no,name,branch,sem,email,phone,college) VALUES('$reg_no','$name','$branch',$sem,'$email','$phone','$college')";
+                $INSERT="INSERT INTO participant (reg_no,name,branch,sem,email,phone,faculty) VALUES('$reg_no','$name','$branch',$sem,'$email','$phone','$faculty')";
                 $INSERT="INSERT INTO registered (rid,reg_no,event_id) VALUES('$rid','$reg_no','$event_id')";
 
                
                 if($conn->query($INSERT)===True){
                     echo "<script>
                     alert('Registered Successfully!');
-                    window.location.href='usn.php';
+                    window.location.href='regNo.php';
                     </script>";
                 }
                 else
                 {
                     echo"<script>
-                    alert(' Already registered this usn');
-                    window.location.href='usn.php';
+                    alert(' Already registered this registration number');
+                    window.location.href='regNo.php';
                     </script>";
                 }
                

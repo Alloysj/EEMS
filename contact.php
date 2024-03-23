@@ -24,9 +24,9 @@
                 <div class="col-md-6 contacts">
                     <h1 style="color:#000080 ; font-size:42px ; font-style:bold "><span class="glyphicon glyphicon-user"></span> Egerton</h1>
                     <p>
-                        <span class="glyphicon glyphicon-envelope"></span> Email: <a href="mailto:egertonevent@gmail.com"></a> <br>
+                        <span class="glyphicon glyphicon-envelope"></span> Email: egertonevent@gmail.com</a> <br>
     
-                        <span class="glyphicon glyphicon-phone"></span> Mobile: <a href="tel:+254115123026"></a>
+                        <span class="glyphicon glyphicon-phone"></span> Mobile: +254715453026</a>
                     </p>
                 </div>
                 <div class="col-md-6 contacts">

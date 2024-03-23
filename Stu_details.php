@@ -43,7 +43,7 @@ while($row = mysqli_fetch_array($result)) {
     <td><?php echo $row["sem"]; ?></td>
     <td><?php echo $row["email"]; ?></td>
     <td><?php echo $row["phone"]; ?></td>
-    <td><?php echo $row["college"]; ?></td>
+    <td><?php echo $row["faculty"]; ?></td>
     <td><?php echo $row["event_title"]; ?></td>
    
 </tr>
