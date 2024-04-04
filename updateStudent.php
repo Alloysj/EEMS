@@ -1,5 +1,5 @@
 
-    <?php include 'classes/db1.php';
+<?php include 'classes/db1.php';
     $id=$_GET['id'];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -18,9 +18,9 @@
                 <div class ="col-md-6 col-md-offset-3">
     <form method="POST">
 <label>Student co-ordinator name</label><br>
-    <input type="text" name="st_name" required class="form-control"><br><br>
+    <input type="text" name="st_name" pattern="[A-Za-z]+" title="please enter letters only" required class="form-control"><br><br>
     <label>Student co-ordinator phone</label><br>
-    <input type="text" name="phone" required class="form-control"><br><br>
+    <input type="number" name="phone" required class="form-control"><br><br>
     <button type="submit" name="update" class = "btn btn-default ">Update</button>
     </div>
     </div>

@@ -21,12 +21,13 @@
                             <input type="text"
                                    id="reg_no"
                                    name="reg_no"
-                                   class="form-control">
+                                   class="form-control" pattern="[A-Z]\d{2}/\d{5}/\d{2}" title="Please follow the required format: A13/09487/19" required> 
                         </div>
                         <button type="submit" class = "btn btn-default">Login</button>
                     </form>
                 </div>
             </div>
         </div>
+    <script src="validate.js"></script>
     </body>
 </html>
