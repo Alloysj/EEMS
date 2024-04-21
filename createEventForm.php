@@ -22,29 +22,35 @@
             <input type="number" name="event_id" required class="form-control"><br><br>
 
             <label>Event Name:</label><br>
-            <input type="text" name="event_title" required pattern="[A-Za-z]+" title="please enter letters only" class="form-control"><br><br>
+            <input type="text" name="event_title" required pattern="[A-Za-z ]+" title="please enter letters only" class="form-control"><br><br>
 
 
             <label>Upload Path to Image:</label><br>
-            <input type="text" name="img_link" required class="form-control"><br><br>
+            <input type="text" name="img_link" required placeholder="images/img.jpg" class="form-control"><br><br>
 
-            <label>Type_ID </label><br>
-            <input type="number" name="type_id" required class="form-control"><br><br>
+            <label>Event Type</label><br>
+            <select name="type_id" id="type_id" class="form-control" required>
+              <option value="1">Technical event</option>
+              <option value="2">Cultural event</option>
+              <option value="3">Academic event</option>
+              <option value="4">Sports and recreation</option>
+              <option value="5">Community service</option>
+            </select><br><br>
 
             <label>Event Date</label><br>
             <input type="date" name="Date" required class="form-control"><br><br>
 
             <label>Event Time</label><br>
             <label>Time:</label><br>
-            <input type="text" name="time" id="time" pattern="(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)" title="Please follow the required format: HH:MM AM/PM" class="form-control" required><br><br>
+            <input type="text" name="time" id="time" placeholder="12:30 PM" pattern="(0[1-9]|1[0-2]):[0-5][0-9] (AM|PM)" title="Please follow the required format: HH:MM AM/PM" class="form-control" required><br><br>
 
 
             <label>Event Location</label><br>
             <input type="text" name="location" required class="form-control"><br><br>
             <label>Staff co-ordinator name</label><br>
-            <input type="text" name="sname" required pattern="[A-Za-z]+" title="please enter letters only" class="form-control"><br><br>
+            <input type="text" name="sname" required pattern="[A-Za-z ]+" title="please enter letters only" class="form-control"><br><br>
             <label>Student co-ordinator name</label><br>
-            <input type="text" name="st_name" pattern="[A-Za-z]+" title="please enter letters only" required class="form-control"><br><br>
+            <input type="text" name="st_name" pattern="[A-Za-z ]+" title="please enter letters only" required class="form-control"><br><br>
 
             <button type="submit" name="update" class="btn btn-default pull-right">Create Event <span class="glyphicon glyphicon-send"></span></button>
 
@@ -56,8 +62,6 @@
       </div>
   </form>
 
-
-  <script src="validate.js"></script>
 </body>
 
 <?php require 'utils/footer.php'; ?>
