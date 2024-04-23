@@ -21,41 +21,9 @@
                     <input type="text" name="reg_no" id="reg_no" pattern="[A-Z]\d{2}/\d{5}/\d{2}" title="Please follow the required format: A13/09487/19" class="form-control" required><br><br>
 
 
-                    <label>Student Name:</label><br>
-                    <input type="text" name="name" id="name" pattern="[A-Za-z]+" title="please enter letters only" class="form-control" required><br><br>
-
-                    <label>Branch:</label><br>
-                    <select name="branch" id="branch" class="form-control" required>
-                        <option value="select"></option>
-                        <option value="Town campus">Town campus</option>
-                        <option value="Main campus">Main campus</option>
-                    </select><br><br>
-
-                    <label>Semester:</label><br>
-                    <select name="sem" id="sem" class="form-control" required>
-                        <option value="select"></option>
-                        <option value="One">One</option>
-                        <option value="Two">Two</option>
-                    </select><br><br>
-
-                    <label>Email:</label><br>
-                    <input type="email" name="email" class="form-control" required><br><br>
-
-                    <label>Phone:</label><br>
-                    <input type="number" name="phone" class="form-control" required><br><br>
-
-                    <label>Faculty:</label><br>
-                    <select name="faculty" id="faculty" class="form-control" required>
-                        <option value="select"></option>
-                        <option value="FASS">FASS</option>
-                        <option value="FOS">FOS</option>
-                        <option value="FERD">FERD</option>
-                        <option value="FOA">FOA</option>
-                        <option value="FEDCOS">FEDCOS</option>
-                    </select><br><br>
-
+                   
                     <button type="submit" name="update" required>Submit</button><br><br>
-                    <a href="regNo.php"><u>Already registered ?</u></a>
+                    
 
                 </form>
             </div>
@@ -70,42 +38,74 @@
 
 <?php
 
+// Check if the registration form is submitted
 if (isset($_POST["update"])) {
     $reg_no = $_POST["reg_no"];
-    $name = $_POST["name"];
-    $branch = $_POST["branch"];
-    $sem = $_POST["sem"];
-    $email = $_POST["email"];
-    $phone = $_POST["phone"];
-    $faculty = $_POST["faculty"];
+    $event_id = $_POST["event_id"]; 
 
-
-    if (!empty($reg_no) || !empty($name) || !empty($branch) || !empty($sem) || !empty($email) || !empty($phone) || !empty($faculty)) {
+    // Validate input (you can add more validation if needed)
+    if (!empty($reg_no)) {
 
         include 'classes/db1.php';
-        $INSERT = "INSERT INTO participant (reg_no,name,branch,sem,email,phone,faculty) VALUES('$reg_no','$name','$branch',$sem,'$email','$phone','$faculty')";
-        $INSERT = "INSERT INTO registered (rid,reg_no,event_id) VALUES('$rid','$reg_no','$event_id')";
 
+        // Check if the registration number exists in the participant table
+        $check_query = $conn->prepare("SELECT reg_no FROM participant WHERE reg_no = ?");
+        $check_query->bind_param("s", $reg_no);
+        $check_query->execute();
+        $check_query->store_result();
 
-        if ($conn->query($INSERT) === True) {
-            echo "<script>
-                    alert('Registered Successfully!');
-                    window.location.href='regNo.php';
-                    </script>";
+        if ($check_query->num_rows > 0) {
+            // Registration number exists, check if the student is already registered for the event
+            $check_registration_query = $conn->prepare("SELECT * FROM registered WHERE reg_no = ? AND event_id = ?");
+            $check_registration_query->bind_param("si", $reg_no, $event_id);
+            $check_registration_query->execute();
+            $check_registration_query->store_result();
+
+            if ($check_registration_query->num_rows > 0) {
+                // Student is already registered for the event
+                echo "<script>
+                        alert('You are already registered for this event.');
+                        window.location.href='register.php';
+                        </script>";
+                exit; // Stop further execution
+            } else {
+                // Student is not registered for the event, insert a new registration record
+                $INSERT = "INSERT INTO registered (reg_no, event_id) VALUES (?, ?)";
+                $stmt = $conn->prepare($INSERT);
+                $stmt->bind_param("si", $reg_no, $event_id); // Use "si" for string and integer data types
+
+                if ($stmt->execute()) {
+                    echo "<script>
+                            alert('Registered for the event!');
+                            window.location.href='RegisteredEvents.php'; // Redirect to homepage or any other page
+                            </script>";
+                    exit; // Stop further execution
+                } else {
+                    echo "<script>
+                            alert('An error occurred while registering for the event.');
+                            window.location.href='register.php';
+                            </script>";
+                    exit; // Stop further execution
+                }
+            }
         } else {
+            // Registration number does not exist, redirect to register page
             echo "<script>
-                    alert(' Already registered this registration number');
-                    window.location.href='regNo.php';
+                    alert('Please register first before registering for the event.');
+                    window.location.href='registerEvent.php';
                     </script>";
+            exit; // Stop further execution
         }
 
+        $stmt->close();
         $conn->close();
     } else {
+        // If any field is empty
         echo "<script>
-            alert('All fields are required');
-            window.location.href='register.php';
-                    </script>";
+                alert('All fields are required');
+                window.location.href='register.php';
+                </script>";
+        exit; // Stop further execution
     }
 }
-
 ?>

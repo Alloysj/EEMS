@@ -1,100 +1,93 @@
 <title>Eems</title>
 <style>
-/*.bgImage {
-    background-image: url(images/eu_logo.png);
-    background-size: contain;
-    background-size: 100%, 100%;
-    height: 50%;
-    background-repeat: no-repeat;
-    height: 350px;
-    margin-bottom: 25px;
-}*/
+    .navbar {
+        background-color: #008000;
+        border: none;
+        border-radius: 0;
+        padding-bottom: 30px;
+    }
 
-/* Update background color */
-.bgImage {
-    background-image: url(images/eu_logo.png);
-    background-size: fit;
-    background-position: center;
-    height: 60vh; 
-    border-top: 150px;
+
+    .navbar-nav>li>a {
+        color: #FFFFFF;
+    }
+
+    .navbar-nav>li>a.active,
+    .navbar-nav>li>a:hover,
+    .navbar-nav>li>a:focus {
+        color: #FFD700;
+        /* Yellow text color on hover/focus/active */
+    }
+
+
+    .navbar-brand {
+        color: #FFFFFF;
+    }
+
+    .navbar-brand:hover,
+    .navbar-brand:focus {
+        color: #FFD700;
+    }
+
+/* CSS for dropdown menu */
+.dropdown-menu {
+    display: none; /* Initially hide the dropdown */
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-
-.navbar {
-    background-color: #008000; 
-    border: none; 
-    border-radius: 0; 
+/* Show dropdown menu when hovering over the login button */
+#login-dropdown:hover .dropdown-menu {
+    display: block;
 }
 
-
-.navbar-nav > li > a {
-    color: #FFFFFF; 
+/* Style for dropdown items */
+.dropdown-menu li {
+    padding: 8px 12px;
 }
 
-.navbar-nav > li > a.active,
-.navbar-nav > li > a:hover,
-.navbar-nav > li > a:focus {
-    color: #FFD700; /* Yellow text color on hover/focus/active */
+/* Style for dropdown links */
+.dropdown-menu li a {
+    color: #333;
+    text-decoration: none;
+    display: block;
 }
 
-
-.navbar-brand {
-    color: #FFFFFF; 
+/* Style for dropdown links on hover */
+.dropdown-menu li a:hover {
+    background-color: #ddd;
 }
 
-.navbar-brand:hover,
-.navbar-brand:focus {
-    color: #FFD700; 
-}
-
-
-.jumbotron {
-    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white background */
-    padding: 50px; 
-    margin-top: 50px; 
-    text-align: center;
-}
-
-.jumbotron h1 {
-    color: #008000; 
-}
-
-.jumbotron p {
-    color: #333333; 
-}
 
 </style>
-<header class="bgImage" > 
-    <nav class="navbar" >
+<header class="bgImage">
+    <nav class="navbar">
         <div class="container">
-        <div class="navbar-header"><!--website name/title-->
-               
-                <a class = "navbar-brand">
-                   <h2>Egerton Event Management System</h2>
-                </a>
-        </div>
-       
-            <ul class="nav navbar-nav navbar-right"><!--navigation-->
-                    <li><a href = "index.php"><strong>Home</strong></a></li>
-                   <!-- <li><a href = "register.php"><strong>Register</strong></a></li> -->
-                    <li><a href = "contact.php"><strong>Contact Us</strong></a></li>
-                    <li><a href = "aboutus.php"><strong>About us</strong></a></li>
-                    <li class="btnlogout"><a class = "btn btn-default navbar-btn" href = "login_form.php">Login <span class = "glyphicon glyphicon-log-in"></span></a></li>
+            <div class="navbar-header"><!--website title-->
 
-            
-                
-                
+                <a class="navbar-brand">
+                    <h2>Egerton Event Management System</h2>
+                </a>
+            </div>
+
+            <ul class="nav navbar-nav navbar-right"><!--navigation-->
+                <li><a href="index.php"><strong>Home</strong></a></li>
+                <li><a href="registerEvent.php"><strong>Register</strong></a></li>
+                <li><a href="contact.php"><strong>Contact Us</strong></a></li>
+                <li><a href="aboutus.php"><strong>About us</strong></a></li>
+                <li class="dropdown" id="login-dropdown">
+                    <a class="dropdown-toggle btn btn-default navbar-btn" href="#">Login <span class="glyphicon glyphicon-log-in"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="studentLogin_form.php?type=student">Student</a></li>
+                        <li><a href="login_form.php?type=admin">Admin</a></li>
+                    </ul>
+                </li>
             </ul>
+
         </div><!--container div-->
     </nav>
-    <div class = "col-md-12">
-        <div class = "container">
-            <div class = "jumbotron"><!--jumbotron-->
-                <h1><strong>Explore<br></strong> Your Favorite Event</h1><!--jumbotron heading-->
-                <br><div class="browse d-md-flex col-md-14" >
-                <div class="row">
-                  
-            </div>
-        </div>
-    </div>
+
 </header>
