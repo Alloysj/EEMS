@@ -193,6 +193,7 @@ INSERT INTO `registered` (`rid`, `reg_no`, `event_id`) VALUES
 (51, 'A13/45645/19', 26);
 
 --
+--
 -- Triggers `registered`
 --
 DELIMITER $$
@@ -201,8 +202,17 @@ set events.participents=events.participents+1
 WHERE events.event_id=new.event_id
 $$
 DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `decrement_participants` AFTER DELETE ON `registered` FOR EACH ROW BEGIN
+    UPDATE events
+    SET participents = participents - 1
+    WHERE event_id = OLD.event_id;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
+
 
 --
 -- Table structure for table `staff_coordinator`
