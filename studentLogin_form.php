@@ -47,10 +47,10 @@ if (isset($_POST["login"])) {
 
     if ($result->num_rows == 1) {
         $row = $result->fetch_assoc();
-        $hashed_password = $row['password'];
+        $db_password = $row['password'];
 
-        // Verify password
-        if (password_verify($password, $hashed_password)) {
+        // Compare passwords
+        if ($password === $db_password) {
             // Password is correct, redirect to student dashboard or homepage
             echo "<script>
                     alert('Login Successful');
