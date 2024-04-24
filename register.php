@@ -21,7 +21,8 @@
                     <input type="text" name="reg_no" id="reg_no" pattern="[A-Z]\d{2}/\d{5}/\d{2}" title="Please follow the required format: A13/09487/19" class="form-control" required><br><br>
 
 
-                   
+                    
+
                     <button type="submit" name="update" required>Submit</button><br><br>
                     
 
@@ -37,75 +38,61 @@
 </html>
 
 <?php
-
-// Check if the registration form is submitted
 if (isset($_POST["update"])) {
     $reg_no = $_POST["reg_no"];
-    $event_id = $_POST["event_id"]; 
+    $event_time = $_POST["event_time"]; // Assuming event_time is in the format "HH:MM AM/PM"
 
-    // Validate input (you can add more validation if needed)
     if (!empty($reg_no)) {
-
         include 'classes/db1.php';
 
-        // Check if the registration number exists in the participant table
-        $check_query = $conn->prepare("SELECT reg_no FROM participant WHERE reg_no = ?");
-        $check_query->bind_param("s", $reg_no);
-        $check_query->execute();
-        $check_query->store_result();
+        // Check if the given reg_no is available in the participant table
+        $SELECT = "SELECT COUNT(*) FROM participant WHERE reg_no = '$reg_no'";
+        $result = $conn->query($SELECT);
+        $row = $result->fetch_assoc();
+        $count = $row["COUNT(*)"];
 
-        if ($check_query->num_rows > 0) {
-            // Registration number exists, check if the student is already registered for the event
-            $check_registration_query = $conn->prepare("SELECT * FROM registered WHERE reg_no = ? AND event_id = ?");
-            $check_registration_query->bind_param("si", $reg_no, $event_id);
-            $check_registration_query->execute();
-            $check_registration_query->store_result();
+        if ($count > 0) {
+            // Reg_no is available, check if the user is already registered for this event
+            $SELECT_REGISTERED = "SELECT COUNT(*) FROM registered WHERE reg_no = '$reg_no' AND event_id = '$event_id'";
+            $result_registered = $conn->query($SELECT_REGISTERED);
+            $row_registered = $result_registered->fetch_assoc();
+            $count_registered = $row_registered["COUNT(*)"];
 
-            if ($check_registration_query->num_rows > 0) {
-                // Student is already registered for the event
+            if ($count_registered > 0) {
+                // User is already registered for this event
                 echo "<script>
                         alert('You are already registered for this event.');
-                        window.location.href='register.php';
-                        </script>";
-                exit; // Stop further execution
+                        window.location.href='index.php';
+                      </script>";
             } else {
-                // Student is not registered for the event, insert a new registration record
-                $INSERT = "INSERT INTO registered (reg_no, event_id) VALUES (?, ?)";
-                $stmt = $conn->prepare($INSERT);
-                $stmt->bind_param("si", $reg_no, $event_id); // Use "si" for string and integer data types
-
-                if ($stmt->execute()) {
+                // User is not registered for this event, proceed with registration
+                $INSERT = "INSERT INTO registered (rid, reg_no, event_id) VALUES ('$rid', '$reg_no', '$event_id')";
+                if ($conn->query($INSERT) === true) {
                     echo "<script>
-                            alert('Registered for the event!');
-                            window.location.href='RegisteredEvents.php'; // Redirect to homepage or any other page
-                            </script>";
-                    exit; // Stop further execution
+                            alert('Registered Successfully!');
+                            window.location.href='regNo.php';
+                          </script>";
                 } else {
                     echo "<script>
-                            alert('An error occurred while registering for the event.');
-                            window.location.href='register.php';
-                            </script>";
-                    exit; // Stop further execution
+                            alert('Already registered this registration number');
+                            window.location.href='regNo.php';
+                          </script>";
                 }
             }
         } else {
-            // Registration number does not exist, redirect to register page
+            // Reg_no not found, alert the user to register first
             echo "<script>
-                    alert('Please register first before registering for the event.');
-                    window.location.href='registerEvent.php';
-                    </script>";
-            exit; // Stop further execution
+                    alert('Registration number not found. Please register first.');
+                    window.location.href='register.php';
+                  </script>";
         }
 
-        $stmt->close();
         $conn->close();
     } else {
-        // If any field is empty
         echo "<script>
                 alert('All fields are required');
                 window.location.href='register.php';
-                </script>";
-        exit; // Stop further execution
+              </script>";
     }
 }
 ?>

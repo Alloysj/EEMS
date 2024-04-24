@@ -51,7 +51,15 @@ if (mysqli_num_rows($result) > 0) {
                             echo '<td>' . $row['name'] . '</td>';
                             echo '<td>'.$row['Date'].'</td>';
                             echo '<td>'.$row['time'].'</td>';
-                            echo '<td>'.$row['location'].'</td>';
+                            $venue_id = $row['venue_id'];
+                            
+                            $venue_query = "SELECT * FROM venues WHERE venue_id = $venue_id";
+                            $venue_result = mysqli_query($conn, $venue_query);
+                            if (mysqli_num_rows($venue_result) > 0) {
+                                $venue_row = mysqli_fetch_assoc($venue_result);
+                                echo '<td>' . $venue_row['venue_name'] . '<td>';
+                                
+                            }
                             
                             echo '<td>'
                         

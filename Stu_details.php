@@ -25,10 +25,7 @@ if (mysqli_num_rows($result) > 0) {
   <tr>
   <th>reg NO</th>
     <th>Name</th>
-    <th>Branch</th>
-    <th>Sem</th>
     <th>Email</th>
-    <th>Phone</th>
     <th>Faculty</th>
     <th>Event</th>
   </tr>
@@ -39,10 +36,7 @@ while($row = mysqli_fetch_array($result)) {
 <tr>
 <td><?php echo $row["reg_no"]; ?></td>
     <td><?php echo $row["name"]; ?></td>
-    <td><?php echo $row["branch"]; ?></td>
-    <td><?php echo $row["sem"]; ?></td>
     <td><?php echo $row["email"]; ?></td>
-    <td><?php echo $row["phone"]; ?></td>
     <td><?php echo $row["faculty"]; ?></td>
     <td><?php echo $row["event_title"]; ?></td>
    
