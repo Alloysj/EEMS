@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 20, 2024 at 12:25 PM
+-- Generation Time: Apr 24, 2024 at 02:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `cems`
+-- Database: `eems`
 --
 
 -- --------------------------------------------------------
@@ -48,11 +48,13 @@ INSERT INTO `events` (`event_id`, `event_title`, `participents`, `img_link`, `ty
 (16, ' Media Education Summit ', 2, 'images/learning_tour.jpeg', 3),
 (17, 'NEXUS Education', 1, 'images/library.jpg', 3),
 (18, 'Maasai culture', 0, 'images/art&culture0.jpg', 2),
-(19, 'Kusa women national Games', 1, 'images/pavillion_grounds.jpg', 4),
-(20, 'Run for Mau', 0, 'images/cultural_week.jpg', 4),
+(19, 'Kusa women national Games', 3, 'images/pavillion_grounds.jpg', 4),
+(20, 'Run for Mau', 1, 'images/cultural_week.jpg', 4),
 (21, 'Swimming', 2, 'images/swimmingpool.jpg', 4),
 (22, 'Tree planting', 0, 'images/tree_planting.jpg', 5),
-(26, 'Competency based curriculum workshop training', 1, 'images/workshop_training.jpg', 1);
+(26, 'Competency based curriculum workshop training', 4, 'images/workshop_training.jpg', 1),
+(27, 'Dance championship', 0, 'images/dance.jpg', 4),
+(28, 'Full stack project building', 5, 'images/full_stack.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -64,27 +66,29 @@ CREATE TABLE `event_info` (
   `event_id` int(10) NOT NULL,
   `Date` date DEFAULT NULL,
   `time` varchar(20) NOT NULL,
-  `location` varchar(300) NOT NULL
+  `venue_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `event_info`
 --
 
-INSERT INTO `event_info` (`event_id`, `Date`, `time`, `location`) VALUES
-(3, '2024-03-10', '11.00am', 'ED10'),
-(4, '2024-03-16', '9.30am', 'ED10'),
-(12, '2024-03-07', '16:00', 'Science complex'),
-(13, '2024-03-08', '08:00', 'Graduation square'),
-(14, '2024-03-08', '08:00', 'Science complex'),
-(16, '2024-03-10', '16:00', 'Graduation square'),
-(17, '2024-03-03', '12:00', 'Kilimo hall'),
-(18, '2024-03-16', '08:00', 'Graduation square'),
-(19, '2024-04-26', '12:00', 'pavillion'),
-(20, '2024-04-26', '10:00', 'pavillion grounds'),
-(21, '2024-04-11', '10:00', 'ARC'),
-(22, '2024-04-02', '10:00', 'botanic garden'),
-(26, '2024-04-30', '10:00 AM', 'pavillion grounds');
+INSERT INTO `event_info` (`event_id`, `Date`, `time`, `venue_id`) VALUES
+(3, '2024-03-10', '11.00 AM', 1),
+(4, '2024-03-16', '9.30 AM', 2),
+(12, '2024-03-07', '16:00 PM', 3),
+(13, '2024-03-08', '08:00 AM ', 4),
+(14, '2024-03-08', '08:00 AM ', 3),
+(16, '2024-03-10', '16:00 PM', 2),
+(17, '2024-03-03', '12:00 PM ', 5),
+(18, '2024-03-16', '08:00 AM', 1),
+(19, '2024-04-26', '12:00 PM', 3),
+(20, '2024-04-26', '12:00 PM', 5),
+(21, '2024-04-29', '10:00 AM', 2),
+(22, '2024-05-04', '10:00 AM', 4),
+(26, '2024-04-30', '10:00 AM', 4),
+(27, '2024-04-27', '10:30 PM', 4),
+(28, '2024-04-27', '12:30 PM', 3);
 
 -- --------------------------------------------------------
 
@@ -163,14 +167,30 @@ INSERT INTO `registered` (`rid`, `reg_no`, `event_id`) VALUES
 (14, 'S13/03185/21', 17),
 (15, 'S13/04315/21', 13),
 (16, 'S11/03213/20', 19),
-(17, 'S12/02345/20', 0),
+(17, 'S12/02345/20', 17),
 (18, 'E13/03853/22', 21),
 (19, 'A12/5411/20', 16),
 (20, 'E13/03853/22', 16),
 (21, 'A12/5411/20', 14),
 (22, 'S13/03185/21', 3),
 (34, 'A12/05411/20', 21),
-(35, 'S11/03213/20', 26);
+(35, 'S11/03213/20', 26),
+(36, 'S11/03213/20', 13),
+(37, 'S13/03185/21', 21),
+(38, 'A13/45645/19', 19),
+(39, 'S11/03213/20', 0),
+(40, 'K12/02345/20', 0),
+(41, 'K12/02345/20', 20),
+(42, 'K12/02345/20', 19),
+(43, 'K12/02345/20', 19),
+(44, 'S13/03185/21', 26),
+(45, 'S13/04345/21', 28),
+(46, 'S13/03185/21', 28),
+(47, 'S11/03213/20', 28),
+(48, 'S12/02345/20', 28),
+(49, 'A12/05411/20', 28),
+(50, 'K12/02345/20', 26),
+(51, 'A13/45645/19', 26);
 
 --
 -- Triggers `registered`
@@ -212,7 +232,9 @@ INSERT INTO `staff_coordinator` (`stid`, `name`, `phone`, `event_id`) VALUES
 (22, 'Aluoch', NULL, 20),
 (23, 'kive', NULL, 21),
 (24, 'wanguya', NULL, 22),
-(26, 'Hezron Akinyi', NULL, 26);
+(26, 'Hezron Akinyi', NULL, 26),
+(27, 'gregory otieno', NULL, 27),
+(28, 'alexis', NULL, 28);
 
 -- --------------------------------------------------------
 
@@ -244,7 +266,32 @@ INSERT INTO `student_coordinator` (`sid`, `st_name`, `phone`, `event_id`) VALUES
 (22, 'Ignatious Berito', '0715123026', 20),
 (23, 'winfrey', NULL, 21),
 (24, 'victor', NULL, 22),
-(26, 'David Ndii', NULL, 26);
+(26, 'David Ndii', NULL, 26),
+(27, 'ignatious berito', NULL, 27),
+(28, 'juma', NULL, 28);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `venues`
+--
+
+CREATE TABLE `venues` (
+  `venue_id` int(11) NOT NULL,
+  `venue_name` varchar(50) NOT NULL,
+  `capacity` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `venues`
+--
+
+INSERT INTO `venues` (`venue_id`, `venue_name`, `capacity`) VALUES
+(1, 'Pavillion', 1000),
+(2, 'ED10', 8),
+(3, 'PST5', 5),
+(4, 'ARC HOTEL', 3),
+(5, 'Kilimo hall', 10);
 
 --
 -- Indexes for dumped tables
@@ -293,6 +340,12 @@ ALTER TABLE `student_coordinator`
   ADD PRIMARY KEY (`sid`);
 
 --
+-- Indexes for table `venues`
+--
+ALTER TABLE `venues`
+  ADD PRIMARY KEY (`venue_id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -312,19 +365,25 @@ ALTER TABLE `event_info`
 -- AUTO_INCREMENT for table `registered`
 --
 ALTER TABLE `registered`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT for table `staff_coordinator`
 --
 ALTER TABLE `staff_coordinator`
-  MODIFY `stid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `stid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `student_coordinator`
 --
 ALTER TABLE `student_coordinator`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+
+--
+-- AUTO_INCREMENT for table `venues`
+--
+ALTER TABLE `venues`
+  MODIFY `venue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
