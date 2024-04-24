@@ -1,12 +1,8 @@
 <script>
-    
-    function registerForEvent(event_id, venueCapacity, participants) {
-        
-        if (participants < venueCapacity) {
-            
-            window.location.href = 'register.php?event_id=' + event_id;
+    function registerForEvent(event_id, event_title, event_date, event_time, venue_name, venue_capacity, participants) {
+        if (participants < venue_capacity) {
+            window.location.href = 'register.php?event_id=' + event_id + '&event_title=' + event_title + '&event_date=' + event_date + '&event_time=' + event_time + '&venue_name=' + venue_name;
         } else {
-            
             alert('Event capacity has been reached. You cannot register for this event.');
         }
     }
@@ -36,7 +32,7 @@
                             if (mysqli_num_rows($venue_result) > 0) {
                                 $venue_row = mysqli_fetch_assoc($venue_result);
                                 echo 'Venue: ' . $venue_row['venue_name'] . '<br>';
-                                $venueCapacity = $venue_row['capacity']; 
+                                $venue_capacity = $venue_row['capacity']; 
                             }
                             echo 'Student Co-ordinator: ' . $row['st_name'] . '<br>';
                             echo 'Staff Co-ordinator: ' . $row['name'] . '<br>';
@@ -61,7 +57,7 @@
                             echo '<button class="btn btn-default" disabled>Register</button>';
                         } else {
                             // If the event is upcoming, enable the register button with event listener
-                            echo '<button class="btn btn-default" onclick="registerForEvent(' . $row['event_id'] . ', ' . $venueCapacity . ', ' . $row['participents'] . ')">Register</button>';
+                            echo '<button class="btn btn-default" onclick="registerForEvent(' . $row['event_id'] . ', \'' . $row['event_title'] . '\', \'' . $row['Date'] . '\', \'' . $row['time'] . '\', \'' . $venue_row['venue_name'] . '\', ' . $venue_capacity . ', ' . $row['participents'] . ')">Register</button>';
                         }
                     ?>
                 </div><!--subcontent div-->
