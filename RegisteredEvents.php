@@ -29,6 +29,7 @@ if(isset($_POST['reg_no'])) {
 
                         <th>Time</th>
                         <th>location </th>
+                        <th>Action</th>
 
                     </tr>
                 </thead>
@@ -45,15 +46,15 @@ if(isset($_POST['reg_no'])) {
                         echo '<td>' . $row['Date'] . '</td>';
                         echo '<td>' . $row['time'] . '</td>';
                         $venue_id = $row['venue_id'];
-                            // Assuming $conn is your database connection
-                            $venue_query = "SELECT * FROM venues WHERE venue_id = $venue_id";
-                            $venue_result = mysqli_query($conn, $venue_query);
-                            if (mysqli_num_rows($venue_result) > 0) {
-                                $venue_row = mysqli_fetch_assoc($venue_result);
-                                echo '<td>' . $venue_row['venue_name'] . '<td>';
-                                
-                            }
+                        $venue_query = "SELECT * FROM venues WHERE venue_id = $venue_id";
+                        $venue_result = mysqli_query($conn, $venue_query);
+                        if (mysqli_num_rows($venue_result) > 0) {
+                            $venue_row = mysqli_fetch_assoc($venue_result);
+                            echo '<td>' . $venue_row['venue_name'] . '</td>';
+                        }
 
+                        // Adding unregister button
+                        echo '<td><form method="post" action="unregister.php"><input type="hidden" name="event_id" value="' . $row['event_id'] . '"><input type="hidden" name="reg_no" value="' . $reg_no . '"><button type="submit" class="btn btn-danger">Unregister</button></form></td>';
 
                         echo '</tr>';
 
