@@ -1,3 +1,17 @@
+<script>
+    
+    function registerForEvent(event_id, venueCapacity, participants) {
+        
+        if (participants < venueCapacity) {
+            
+            window.location.href = 'register.php?event_id=' + event_id;
+        } else {
+            
+            alert('Event capacity has been reached. You cannot register for this event.');
+        }
+    }
+</script>
+
 <div class="container">
     <div class="col-md-12">
         <hr>
@@ -14,15 +28,15 @@
                         <?php
                             echo 'Date: ' . $row['Date'] . '<br>';
                             echo 'Time: ' . $row['time'] . '<br>';
-                            // Retrieve venue information based on venue_id
+                            
                             $venue_id = $row['venue_id'];
-                            // Assuming $conn is your database connection
+                            
                             $venue_query = "SELECT * FROM venues WHERE venue_id = $venue_id";
                             $venue_result = mysqli_query($conn, $venue_query);
                             if (mysqli_num_rows($venue_result) > 0) {
                                 $venue_row = mysqli_fetch_assoc($venue_result);
                                 echo 'Venue: ' . $venue_row['venue_name'] . '<br>';
-                                // You can display other venue information here as needed
+                                $venueCapacity = $venue_row['capacity']; 
                             }
                             echo 'Student Co-ordinator: ' . $row['st_name'] . '<br>';
                             echo 'Staff Co-ordinator: ' . $row['name'] . '<br>';
@@ -33,10 +47,10 @@
                             if ($event_time < $current_time) {
                                 // Event is past
                                 echo '<span style="color:red;">This event has already passed.</span><br>';
-                                $register_disabled = true; // Set flag to disable register button
+                                $register_disabled = true; 
                             } else {
                                 // Event is upcoming
-                                $register_disabled = false; // Set flag to enable register button
+                                $register_disabled = false; 
                             }
                         ?>
                     </p>
@@ -46,8 +60,8 @@
                             // If the event is past, disable the register button
                             echo '<button class="btn btn-default" disabled>Register</button>';
                         } else {
-                            // If the event is upcoming, enable the register button
-                            echo '<a class="btn btn-default" href="register.php?event_id=' . $row['event_id'] . '"> <span class="glyphicon glyphicon-circle-arrow-right"></span>Register</a>';
+                            // If the event is upcoming, enable the register button with event listener
+                            echo '<button class="btn btn-default" onclick="registerForEvent(' . $row['event_id'] . ', ' . $venueCapacity . ', ' . $row['participents'] . ')">Register</button>';
                         }
                     ?>
                 </div><!--subcontent div-->
