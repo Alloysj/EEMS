@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 23, 2024 at 11:12 AM
+-- Generation Time: Apr 20, 2024 at 12:25 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `eems`
+-- Database: `cems`
 --
 
 -- --------------------------------------------------------
@@ -64,27 +64,27 @@ CREATE TABLE `event_info` (
   `event_id` int(10) NOT NULL,
   `Date` date DEFAULT NULL,
   `time` varchar(20) NOT NULL,
-  `venue_id` int(11) NOT NULL
+  `location` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `event_info`
 --
 
-INSERT INTO `event_info` (`event_id`, `Date`, `time`, `venue_id`) VALUES
-(3, '2024-03-10', '11.00am', 1),
-(4, '2024-03-16', '9.30am', 2),
-(12, '2024-03-07', '16:00', 3),
-(13, '2024-03-08', '08:00', 4),
-(14, '2024-03-08', '08:00', 3),
-(16, '2024-03-10', '16:00', 2),
-(17, '2024-03-03', '12:00', 5),
-(18, '2024-03-16', '08:00', 1),
-(19, '2024-04-26', '12:00', 3),
-(20, '2024-04-26', '10:00', 5),
-(21, '2024-04-11', '10:00', 2),
-(22, '2024-04-02', '10:00', 4),
-(26, '2024-04-30', '10:00 AM', 4);
+INSERT INTO `event_info` (`event_id`, `Date`, `time`, `location`) VALUES
+(3, '2024-03-10', '11.00am', 'ED10'),
+(4, '2024-03-16', '9.30am', 'ED10'),
+(12, '2024-03-07', '16:00', 'Science complex'),
+(13, '2024-03-08', '08:00', 'Graduation square'),
+(14, '2024-03-08', '08:00', 'Science complex'),
+(16, '2024-03-10', '16:00', 'Graduation square'),
+(17, '2024-03-03', '12:00', 'Kilimo hall'),
+(18, '2024-03-16', '08:00', 'Graduation square'),
+(19, '2024-04-26', '12:00', 'pavillion'),
+(20, '2024-04-26', '10:00', 'pavillion grounds'),
+(21, '2024-04-11', '10:00', 'ARC'),
+(22, '2024-04-02', '10:00', 'botanic garden'),
+(26, '2024-04-30', '10:00 AM', 'pavillion grounds');
 
 -- --------------------------------------------------------
 
@@ -117,24 +117,24 @@ INSERT INTO `event_type` (`type_id`, `type_title`) VALUES
 CREATE TABLE `participant` (
   `reg_no` varchar(20) NOT NULL,
   `name` varchar(100) NOT NULL,
-  `branch` varchar(11) NOT NULL,
-  `sem` int(11) NOT NULL,
   `email` varchar(300) NOT NULL,
-  `phone` varchar(12) NOT NULL,
-  `faculty` varchar(20) NOT NULL
+  `faculty` varchar(20) NOT NULL,
+  `password` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `participant`
 --
 
-INSERT INTO `participant` (`reg_no`, `name`, `branch`, `sem`, `email`, `phone`, `faculty`) VALUES
-('1VA17CS03', 'name', 'town', 1, 'example@gmail.com', '0745984981', 'science'),
-('34534534', 'invicto ', 'main', 2, 'vancedg352@gmail.com', '0745984981', 'science'),
-('S11/03213/20', 'peris bella', 'Main campus', 1, 'perisb@gmail.com', '0723585737', 'FOS'),
-('S13/03185/21', 'invicto ', 'main', 2, 'vancedg352@gmail.com', '+25424346674', 'science'),
-('S13/04315/21', 'victor', 'main', 2, 'example@gmail.com', '0745984981', 'science'),
-('S13/04345/21', 'Victor', 'main', 2, 'example@gmail.com', '0712353344', 'FOS');
+INSERT INTO `participant` (`reg_no`, `name`, `email`, `faculty`, `password`) VALUES
+('A12/05411/20', 'samuel kimani', 'samuelk@gmail.com', 'FASS', ''),
+('A13/45645/19', 'gregory ambani', 'gregory@gmail.com', 'FASS', ''),
+('K12/02345/20', 'brabus Teng', 'brabus@gmail.com', 'FOA', ''),
+('P12/02343/20', 'jamila mbogo', 'jamilam@gmail.com', 'ENGINEERING', ''),
+('S11/03213/20', 'peris bella', 'perisb@gmail.com', 'FOS', ''),
+('S12/02345/20', 'paul colito', 'paulc@gmail.com', 'FOS', ''),
+('S13/03185/21', 'invicto ', 'vancedg352@gmail.com', 'FOS', ''),
+('S13/04345/21', 'Victor', 'example@gmail.com', 'FOS', '');
 
 -- --------------------------------------------------------
 
@@ -170,9 +170,7 @@ INSERT INTO `registered` (`rid`, `reg_no`, `event_id`) VALUES
 (21, 'A12/5411/20', 14),
 (22, 'S13/03185/21', 3),
 (34, 'A12/05411/20', 21),
-(35, 'S11/03213/20', 26),
-(36, 'S11/03213/20', 0),
-(37, 'S13/03185/21', 0);
+(35, 'S11/03213/20', 26);
 
 --
 -- Triggers `registered`
@@ -248,30 +246,6 @@ INSERT INTO `student_coordinator` (`sid`, `st_name`, `phone`, `event_id`) VALUES
 (24, 'victor', NULL, 22),
 (26, 'David Ndii', NULL, 26);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `venues`
---
-
-CREATE TABLE `venues` (
-  `venue_id` int(11) NOT NULL,
-  `venue_name` varchar(50) NOT NULL,
-  `capacity` int(11) NOT NULL,
-  `event_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `venues`
---
-
-INSERT INTO `venues` (`venue_id`, `venue_name`, `capacity`, `event_id`) VALUES
-(1, 'Pavillion', 1000, NULL),
-(2, 'ED10', 8, NULL),
-(3, 'PST5', 5, NULL),
-(4, 'ARC HOTEL', 3, NULL),
-(5, 'Kilimo hall', 10, NULL);
-
 --
 -- Indexes for dumped tables
 --
@@ -319,12 +293,6 @@ ALTER TABLE `student_coordinator`
   ADD PRIMARY KEY (`sid`);
 
 --
--- Indexes for table `venues`
---
-ALTER TABLE `venues`
-  ADD PRIMARY KEY (`venue_id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -344,7 +312,7 @@ ALTER TABLE `event_info`
 -- AUTO_INCREMENT for table `registered`
 --
 ALTER TABLE `registered`
-  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `rid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT for table `staff_coordinator`
@@ -357,12 +325,6 @@ ALTER TABLE `staff_coordinator`
 --
 ALTER TABLE `student_coordinator`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
-
---
--- AUTO_INCREMENT for table `venues`
---
-ALTER TABLE `venues`
-  MODIFY `venue_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
