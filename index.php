@@ -1,171 +1,223 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Eems</title>
-        <?php require 'utils/styles.php';?>
-      
-        
-    
-            </head>
-    <body>
-        <?php require 'utils/header.php'; ?><!--header content. file found in utils folder-->
-        <div class = "content"><!--body content holder-->
-            <div class = "container">
-                <div class = "col-md-12"><!--body content title holder with 12 grid columns-->
-                    <h1 style="color:#000080 ; font-size:42px ; font-style:bold "><strong>  Register your Favourite events:</strong></h1><!--body content title-->
 
-            </div>
-            
-            
-            <div class="container">
-            <div class="col-md-12">
-            <hr>
-            </div>
-            </div>
-            
-            <div class="row"><!--technical content-->
-                <section>
-                    <div class="container">
-                        <div class="col-md-6"><!--image holder with 6 grid columns-->
-                            <img src="images/technical.jpg" class="img-responsive">
-                        </div>
-                        <div class="subcontent col-md-6"><!--Text holder with 6 column grid-->
-                        
-                            <h1 style="color:#003300 ; font-size:38px ;" ><u><strong>Technical Events</strong></u></h1><!--title-->
-                            <p><!--content-->
-                                EMBRACE YOUR TECHNICAL SKILLS BY PARTICIPATING IN OUR DIFFERENT TECHNICAL EVENTS!
-                            </p>
-                            
-                            <br><br>
-                        <?php $id=1;
-                        echo
-                             '<a class="btn btn-default"  href="viewEvent.php?id='.$id.'"> <span class="glyphicon glyphicon-circle-arrow-right"></span>View Technical Events</a>'
-                        ?>
-                             </div><!--subcontent div-->
-                    </div><!--container div-->
-                </section>
-            </div><!--row div-->
-            
-            <div class="container">
-            <div class="col-md-12">
-            <hr>
-            </div>
-            </div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Eems</title>
+    <?php require 'utils/styles.php'; ?><!--css links. file found in utils folder-->
 
-            <div class="row">
-                <section>
-                    <div class="container">
-                        <div class="col-md-6"><!--image holder with 6 grid columns-->
-                            <img src="images/art&culture0.jpg" class="img-responsive">
-                        </div>
-                        <div class="subcontent col-md-6"><!--Text holder with 6 column grid-->
-                            <h1 style="color:#003300 ; font-size:38px ;"><strong><u>Cultural and Arts Events</u></strong></h1><!--title-->
-                            <p><!--content-->
-                                EMBRACE YOUR AFRICAN CULTURE BY PARTICIPATING IN THE UPCOMING CULTURAL EVENT!
-                            </p>
-                            
-                            <br><br>
-                            <?php 
-                            $id=2;
-                            echo
-                             '<a class="btn btn-default" href="viewEvent.php?id='.$id .'"> <span class="glyphicon glyphicon-circle-arrow-right"></span>View cultural Events</a>'
-                        ?>
-                        </div><!--subcontent div-->
-                    </div><!--container div-->
-                </section>
-            </div><!--row div-->
-            
-            <div class="container">
-            <div class="col-md-12">
-            <hr>
-            </div>
-            </div>
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-            <div class="row">
-                <section>
-                    <div class="container">
-                        <div class="col-md-6"><!--image holder with 6 grid columns-->
-                            <img src="images/library.jpg" class="img-responsive">
-                        </div>
-                        <div class="subcontent col-md-6"><!--Text holder with 6 column grid-->
-                            <h1 style="color:#003300 ; font-size:38px ;"><strong><u>Academic Events</strong></u></h1><!--title-->
-                            <p><!--content-->
-                                EMBRACE YOUR CONFIDENCE BY PARTICIPATING IN OUR ACADEMIC EVENTS TO GROW YOUR KNOWLDGE!
-                            </p>
-                            
-                            <br><br>
-                            <?php 
-                            $id=3;
-                            echo
-                             '<a class="btn btn-default" href="viewEvent.php?id='.$id .'"> <span class="glyphicon glyphicon-circle-arrow-right"></span>View Academic Events</a>'
-                        ?>
-                        </div><!--subcontent div-->
-                    </div><!--container div-->
-                </section>
-            </div><!--row div-->
-            
-            <div class="container">
-            <div class="col-md-12">
-                <hr>
-            </div>
-            </div>
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-            <div class="row">
-                <section>
-                    <div class="container">
-                        <div class="col-md-6"><!--image holder with 6 grid columns-->
-                            <img src="images/pavillion.jpg" class="img-responsive">
-                        </div>
-                        <div class="subcontent col-md-6"><!--Text holder with 6 column grid-->
-                            <h1 style="color:#003300 ; font-size:38px ;"><strong><u>Sports and Recreation Events</u></strong></h1><!--title-->
-                            <p><!--content-->
-                                 GROW YOUR TALENT BY PARTICIPATING IN OUR SPORTS AND RECREATION ACTIVITIES!
-                            </p>
-                            
-                            
-                            <br><br><br>
-                            <?php 
-                            $id=4;
-                            echo
-                             '<a class="btn btn-default" href="viewEvent.php?id='.$id .'"> <span class="glyphicon glyphicon-circle-arrow-right"></span>View Sports Events</a>'
-                        ?>
-                        </div><!--subcontent div-->
-                    </div><!--container div-->
-                </section>
-            </div><!--row div-->
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #28a745; /* Green background */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
 
+        .button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        /* Modal styles */
+        .modal-container {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-content {
+            background-color: #28a745; /* Green modal background */
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #218838; /* Darker border color */
+            width: 80%;
+            max-width: 400px;
+            position: relative;
+            border-radius: 5px;
+        }
+
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 20px;
+            color: #fff; /* White close icon */
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #ccc; /* Lighter color on hover */
+        }
+
+        /* Form styles */
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #fff; /* White label text */
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #28a745; /* Green button */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+
+        .signup-link {
+            margin-top: 10px;
+            text-align: center;
+            color: #fff; /* White signup link text */
+        }
+
+        .signup-link a {
+            color: #fff; /* White link color */
+            text-decoration: underline;
+        }
+
+        .signup-link a:hover {
+            color: #ccc; /* Lighter color on hover */
+        }
+
+        /* Updated CSS for the navbar */
+        .navbar {
+            background-color: #008000;
+            border: none;
+            border-radius: 0;
+            padding-bottom: 30px;
+        }
+
+        .navbar-brand {
+            color: #ffffff; /* White text */
+            background-color: #008000; /* Green background */
+            padding: 10px; /* Add padding for spacing */
+            border-radius: 5px; /* Add border-radius for rounded corners */
+        }
+
+        .navbar-brand:hover,
+        .navbar-brand:focus {
+            color: #ffd700; /* Yellow text on hover/focus */
+            background-color: #006400; /* Darker green on hover/focus */
+        }
+
+    </style>
+    <header class="bgImage">
+    <nav class="navbar">
         <div class="container">
-            <div class="col-md-12">
-            <hr>
-            </div>
-            </div>
+            <div class="navbar-header"><!--website title-->
 
-        <div class="row">
-                <section>
-                    <div class="container">
-                        <div class="col-md-6"><!--image holder with 6 grid columns-->
-                            <img src="images/tree_planting.jpg" class="img-responsive">
-                        </div>
-                        <div class="subcontent col-md-6"><!--Text holder with 6 column grid-->
-                            <h1 style="color:#003300 ; font-size:38px ;"><strong><u>Community service Events</u></strong></h1><!--title-->
-                            <p><!--content-->
-                                 GIVE YOUR GRATITUDES TO THE SOCIETY BY TAKING PLACE IN OUR COMMUNITY SERVICE EVENTS!
-                            </p>
-                            
-                            
-                            <br><br><br>
-                            <?php 
-                            $id=5;
-                            echo
-                             '<a class="btn btn-default" href="viewEvent.php?id='.$id .'"> <span class="glyphicon glyphicon-circle-arrow-right"></span>View Community Service Events</a>'
-                        ?>
-                        </div><!--subcontent div-->
-                    </div><!--container div-->
-                </section>
-            </div><!--row div-->
+                <a class="navbar-brand">
+                    <h2>Egerton Event Management System</h2>
+                </a>
+            </div>
+    </header>
+</head>
 
-  
-        <?php require 'utils/footer.php'; ?><!--footer content. file found in utils folder-->
-    </body>
+<body>
+    <div class="container">
+        <h2>Welcome to Eems</h2>
+        <p>Please select your role:</p>
+        <a href="login.php?action=student" class="button" onclick="showModal('login.php?action=student')">Student</a>
+        <a href="#" class="button" onclick="showModal('adminModal')">Admin</a>
+    </div>
+
+    <script>
+        function showModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "block";
+        }
+
+        function hideModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = "none";
+        }
+
+        function validateAdminPassword() {
+            var adminPassword = document.getElementById("admin_password").value;
+            if (adminPassword !== "admin") {
+                alert("Invalid admin password!");
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+    <!-- Student Login Modal -->
+    <div id="studentModal" class="modal-container">
+        <div class="modal-content">
+            <span class="close" onclick="hideModal('studentModal')">&times;</span>
+            <h3>Student Login</h3>
+            <form method="POST" action="home.php" id="studentLoginForm">
+                <label for="reg_no">Registration Number:</label>
+                <input type="text" id="reg_no" name="reg_no" required><br>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br>
+                <button type="submit">Login</button>
+            </form>
+            <div class="signup-link">
+                <p>Don't have an account? <a href="registerEvent.php">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div id="adminModal" class="modal-container">
+        <div class="modal-content">
+            <span class="close" onclick="hideModal('adminModal')">&times;</span>
+            <h3>Admin Login</h3>
+            <form method="POST" action="adminpage.php" id="adminLoginForm" onsubmit="return validateAdminPassword()">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required><br>
+                <label for="admin_password">Password:</label>
+                <input type="password" id="admin_password" name="admin_password" required><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+</body>
+
 </html>
