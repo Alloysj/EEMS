@@ -103,13 +103,13 @@ $conn->close(); // Close the database connection
             const regNoValue = regNoInput.value.toUpperCase();
 
             if (regNoValue.startsWith('A')) {
-                facultyInput.value = 'FASS';
+                facultyInput.value = 'FASS'
             } else if (regNoValue.startsWith('S')) {
-                facultyInput.value = 'FOS';
+                facultyInput.value = 'FOS'
             } else if (regNoValue.startsWith('K')) {
-                facultyInput.value = 'FOA';
+                facultyInput.value = 'FOA'
             } else if (regNoValue.startsWith('P')) {
-                facultyInput.value = 'ENGINEERING';
+                facultyInput.value = 'ENGINEERING'
             } else {
                 facultyInput.value = "";
             }
@@ -121,12 +121,24 @@ $conn->close(); // Close the database connection
             const passwordMatchMessage = document.getElementById("passwordMatchMessage");
             const submit = document.getElementById("submit");
 
-            if (password === confirmPassword) {
-                passwordMatchMessage.textContent = "Passwords match!";
-                passwordMatchMessage.style.color = "green";
-                submit.disabled = false;
+            // Password strength criteria
+            const hasUpperCase = /[A-Z]/.test(password);
+            const hasLowerCase = /[a-z]/.test(password);
+            const hasNumber = /\d/.test(password);
+            const hasSpecialChar = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password);
+
+            if (password.length >= 8 && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar) {
+                if (password === confirmPassword) {
+                    passwordMatchMessage.textContent = "Passwords match and are strong!";
+                    passwordMatchMessage.style.color = "green";
+                    submit.disabled = false;
+                } else {
+                    passwordMatchMessage.textContent = "Passwords do not match!";
+                    passwordMatchMessage.style.color = "red";
+                    submit.disabled = true;
+                }
             } else {
-                passwordMatchMessage.textContent = "Passwords do not match!";
+                passwordMatchMessage.textContent = "Password must contain at least 8 characters, including uppercase, lowercase, number, and special character";
                 passwordMatchMessage.style.color = "red";
                 submit.disabled = true;
             }
