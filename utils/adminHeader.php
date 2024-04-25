@@ -2,14 +2,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Eems</title>
     <style>
-.bgImage 
-{
-    background-image: url(images/EU_main_gate.jpg);
-    background-size: cover;
-    background-position: center center;
-    height: 600px;
-    margin-bottom: 29px;
-}
+   nav{
+    background-color: #008000;
+   }
 </style>
 </head>
 
@@ -28,6 +23,7 @@
             <ul class="nav navbar-nav navbar-right"><!--navigation-->
             <li><a href = "adminPage.php"><strong>Home</strong></a></li>
             <li><a href = "Stu_details.php"><strong>Student Details</strong></a></li>
+            <li><a href = "createEventForm.php"><strong>create Event</strong></a></li>
                     <li><a href = "Stu_cordinator.php"><strong>Student Co-ordinator</strong></a></li>
                     <li><a href = "Staff_cordinator.php"><strong>Staff-Co-ordinator</strong></a></li>
                     <li class="btnlogout"><a class = "btn btn-default navbar-btn" href = "index.php">Logout <span class = "glyphicon glyphicon-log-out"></span></a></li>            
@@ -35,14 +31,5 @@
             </ul>
         </div><!--container div-->
     </nav>
-    <div class = "col-md-12">
-        <div class = "container">
-            <div class = "jumbotron"><!--jumbotron-->
-                <h1><strong>Explore<br></strong> Your Favorite Event</h1><!--jumbotron heading-->
-                <div class="browse d-md-flex col-md-14" >
-                <div class="row">
-                  
-            </div>
-        </div>
-    </div>
+    
 </header>
