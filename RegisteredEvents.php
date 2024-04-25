@@ -2,11 +2,12 @@
 require_once 'utils/header.php';
 require_once 'utils/styles.php';
 
-// Check if 'reg_no' is set in the $_POST array or in the $_GET array
-if(isset($_POST['reg_no'])) {
-    $reg_no = $_POST['reg_no'];
-} elseif(isset($_GET['reg_no'])) {
-    $reg_no = $_GET['reg_no'];
+// Start the session
+session_start();
+
+// Check if 'reg_no' is set in the session
+if(isset($_SESSION['reg_no'])) {
+    $reg_no = $_SESSION['reg_no'];
 } else {
     $reg_no = null;
 }
@@ -67,7 +68,7 @@ if($reg_no !== null) {
 </div>
 <?php
 } else {
-    // If reg_no is not provided, display a message
+    // If reg_no is not provided in session, display a message
     echo 'Please provide registration number.';
 }
 include 'utils/footer.php';
